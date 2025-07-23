@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ -d "/boot/efi/EFI/bonsai" ]; then
+    mv /boot/efi/EFI/bonsai /boot/efi/EFI/n/ && nohup bash /etc/grub.d/100_efi
+else
+    if [ -d "/boot/efi/EFI/BOOT" ]; then
+         echo "/boot/efi/EFI/BOOT already exists. Exiting."
+         exit 0
+     else
+         mv "/boot/efi/EFI/n/" "/boot/efi/EFI/BOOT" && \
+         cp "/boot/efi/EFI/BOOT/grubx64.efi" "/boot/efi/EFI/BOOT/bootx64.efi"
+     fi
+fi

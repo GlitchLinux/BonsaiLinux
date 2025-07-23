@@ -1,0 +1,29 @@
+#!/bin/sh
+exec tail -n +3 $0
+# This file provides custom boot manager entries
+
+### UEFI Entries ###
+menuentry "rEFInd (UEFI)" --class refind {
+    insmod part_gpt
+    insmod fat
+    insmod chain
+    search --file --no-floppy --set=root /EFI/refind/bootx64.efi
+    chainloader /EFI/refind/bootx64.efi
+}
+
+menuentry "GRUBFM (UEFI)" --class grubfm {
+    insmod part_gpt
+    insmod fat
+    insmod chain
+    search --file --no-floppy --set=root /EFI/grubfm/grubfmx64.efi
+    chainloader /EFI/grubfm/grubfmx64.efi
+}
+
+### BIOS/Legacy Entries ###
+menuentry "GRUBFM (BIOS)" --class grubfm {
+    insmod multiboot
+    insmod ext2
+    search --file --no-floppy --set=root /boot/grubfm/grubfm.elf
+    multiboot /boot/grubfm/grubfm.elf
+    boot
+}
