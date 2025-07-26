@@ -556,12 +556,12 @@ show_rsync_progress() {
             done
             
             # Display with compact, responsive formatting
-            echo "┌─ Installation Progress ───────────────────────────────┐"
-            printf "│ [%s] %3d%% │ \n" "$bar" "$progress_percent"
-            echo "├───────────────────────────────────────────────────────┤"
+            echo "┌─ Installation Progress ────────────────────────────────────┐"
+            printf "│ [%s] %3d%% │\n" "$bar" "$progress_percent"
+            echo "├────────────────────────────────────────────────────────────┤"
             printf "│ Files: %'d/%'d │ Data: %'dMB/%'dMB │\n" \
                 "$current_files" "$total_files" "$current_mb" "$total_mb"
-            printf "│ Time: %ds elapsed │ ETA: %s │\n" \
+            printf "│ Time: %ds elapsed │ ETA: %s │ \n" \
                 "$elapsed" "$eta"
             echo "└─────────────────────────────────────────────────────────┘"
             
