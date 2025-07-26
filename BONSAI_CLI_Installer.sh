@@ -475,7 +475,7 @@ show_rsync_progress() {
     clear
     
     # Create control file
-    local control_file="/tmp/progress_control_$$"
+    local control_file="/tmp/progress_control_$"
     echo "running" > "$control_file"
     
     # Simple progress monitor
@@ -500,6 +500,11 @@ show_rsync_progress() {
             local progress_percent=0
             if [[ $total_size -gt 0 ]]; then
                 progress_percent=$((current_size * 100 / total_size))
+            fi
+            
+            # Cap progress at 100%
+            if [[ $progress_percent -gt 100 ]]; then
+                progress_percent=100
             fi
             
             # Calculate speed
@@ -530,20 +535,35 @@ show_rsync_progress() {
                 fi
             fi
             
-            # Create progress bar
+            # Create progress bar with exact calculation
             local bar=""
             local bar_length=50
             local filled=$((progress_percent * bar_length / 100))
-            for ((i=0; i<filled; i++)); do bar+="█"; done
-            for ((i=filled; i<bar_length; i++)); do bar+="░"; done
             
-            # Display
-            echo "┌─ Installation Progress ───────────────────────────────────────────────────┐"
-            printf "│ [%s] %3d%% │\n" "$bar" "$progress_percent"
-            echo "└──────────────────────────────────────────────────────────────────────────┘"
-            printf "│ Files: %'d / %'d ¦ Data: %'dMB / %'dMB ¦ Time: %ds elapsed | ETA: %s │\n" \
-                "$current_files" "$total_files" "$current_mb" "$total_mb" "$elapsed" "$eta"
-            echo "└──────────────────────────────────────────────────────────────────────────┘"
+            # Ensure filled is within bounds
+            if [[ $filled -lt 0 ]]; then
+                filled=0
+            elif [[ $filled -gt $bar_length ]]; then
+                filled=$bar_length
+            fi
+            
+            # Build progress bar
+            for ((i=0; i<filled; i++)); do 
+                bar+="█"
+            done
+            for ((i=filled; i<bar_length; i++)); do 
+                bar+="░"
+            done
+            
+            # Display with compact, responsive formatting
+            echo "┌─ Installation Progress ───────────────────────────────┐"
+            printf "│ [%s] %3d%% │ \n" "$bar" "$progress_percent"
+            echo "├───────────────────────────────────────────────────────┤"
+            printf "│ Files: %'d/%'d │ Data: %'dMB/%'dMB │\n" \
+                "$current_files" "$total_files" "$current_mb" "$total_mb"
+            printf "│ Time: %ds elapsed │ ETA: %s │\n" \
+                "$elapsed" "$eta"
+            echo "└─────────────────────────────────────────────────────────┘"
             
             # Clear rest of screen
             printf "\033[J"
@@ -574,7 +594,6 @@ show_rsync_progress() {
         return $rsync_exit
     fi
 }
-
 sync_filesystem() {
     clear_and_header
     show_step "7" "Installing System Files"
