@@ -869,7 +869,6 @@ main() {
     echo -e "${WHITE} ${CHECK} ENTER will start Install${NC}"
     echo -e "${WHITE} ${CROSS} CTRL+C to cancel Install${NC}"
     echo ""
-    read -r
     
     # Installation steps
     check_root
