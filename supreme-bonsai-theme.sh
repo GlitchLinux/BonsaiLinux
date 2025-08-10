@@ -491,18 +491,18 @@ EOF
 # This file gets copied to /boot/grub/live-boot.cfg if /boot/live/filesystem.squashfs exists
 
 menuentry "$distro_name - LIVE" {
-    linux /boot/live/vmlinuz boot=live config quiet
-    initrd /boot/live/initrd.img
+    linux /live/vmlinuz boot=live config quiet
+    initrd /live/initrd.img
 }
 
 menuentry "$distro_name - Boot ISO to RAM" {
-    linux /boot/live/vmlinuz boot=live config quiet toram
-    initrd /boot/live/initrd.img
+    linux /live/vmlinuz boot=live config quiet toram
+    initrd /live/initrd.img
 }
 
 menuentry "$distro_name - Encrypted Persistence" {
-    linux /boot/live/vmlinuz boot=live components quiet splash noeject findiso=${iso_path} persistent=cryptsetup persistence-encryption=luks persistence
-    initrd /boot/live/initrd.img
+    linux /live/vmlinuz boot=live components quiet splash noeject findiso=${iso_path} persistent=cryptsetup persistence-encryption=luks persistence
+    initrd /live/initrd.img
 }
 
 menuentry "Main Menu" {
