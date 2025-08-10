@@ -28,8 +28,8 @@ GEAR="⚙️"
 FIRE="🔥"
 
 # Get the actual script path - THIS IS THE FIX!
-SCRIPT_PATH="$(realpath "$0")"
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+SCRIPT_PATH="$(realpath "/tmp/supreme-bonsai-theme.sh")"
+SCRIPT_DIR="$(dirname "/tmp/")"
 
 # Define directories
 SUPREME_DIR="/usr/local/supreme_grub"
