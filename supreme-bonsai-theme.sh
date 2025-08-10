@@ -865,11 +865,8 @@ main() {
     
     echo -e "${PURPLE}  ━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo -e "${WHITE}  https://glitchlinux.wtf${NC}"
-    echo -e "${PURPLE}  ━━━━━━━━━━━━━━━━━━━━━━━${NC}\n"
-    echo -e "${WHITE} ${CHECK} ENTER will start Install${NC}"
-    echo -e "${WHITE} ${CROSS} CTRL+C to cancel Install${NC}"
-    echo ""
-    
+    echo -e "${PURPLE}  ━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+
     # Installation steps
     check_root
    # check_internet
