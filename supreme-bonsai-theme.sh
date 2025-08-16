@@ -467,17 +467,17 @@ install_grub_configs() {
     sed "s/\$distro_name/$DISTRO_NAME/g" > "/etc/grub.d/live-boot-1" << 'EOF'
 # This file gets copied to /boot/grub/live-boot.cfg if /live/filesystem.squashfs exists
 
-menuentry "$distro_name - LIVE" {
+menuentry "Live" {
     linux /live/vmlinuz boot=live config quiet
     initrd /live/initrd.img
 }
 
-menuentry "$distro_name - Boot ISO to RAM" {
+menuentry "Boot to RAM" {
     linux /live/vmlinuz boot=live config quiet toram
     initrd /live/initrd.img
 }
 
-menuentry "$distro_name - Encrypted Persistence" {
+menuentry "Encrypted Persistence" {
     linux /live/vmlinuz boot=live components quiet splash noeject findiso=${iso_path} persistent=cryptsetup persistence-encryption=luks persistence
     initrd /live/initrd.img
 }
@@ -490,17 +490,17 @@ EOF
     sed "s/\$distro_name/$DISTRO_NAME/g" > "/etc/grub.d/live-boot-2" << 'EOF'
 # This file gets copied to /boot/grub/live-boot.cfg if /boot/live/filesystem.squashfs exists
 
-menuentry "$distro_name - LIVE" {
+menuentry "Live" {
     linux /live/vmlinuz boot=live config quiet
     initrd /live/initrd.img
 }
 
-menuentry "$distro_name - Boot ISO to RAM" {
+menuentry "Boot to RAM" {
     linux /live/vmlinuz boot=live config quiet toram
     initrd /live/initrd.img
 }
 
-menuentry "$distro_name - Encrypted Persistence" {
+menuentry "Encrypted Persistence" {
     linux /live/vmlinuz boot=live components quiet splash noeject findiso=${iso_path} persistent=cryptsetup persistence-encryption=luks persistence
     initrd /live/initrd.img
 }
